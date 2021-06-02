@@ -130,7 +130,7 @@ ton of problems, probably out of overambition.
 This is probably the part where it stops being boring and more fun for you to
 read.
 
-1. **GUI code is absolutely fucking garbage.** \
+1. **GUI code is absolute garbage.** \
    I worked with GUI code before, but I never imagined it would be so tedious to
    write such a simple, awful looking window.
    ![GUI Code](/images/gui-code.png) \
