@@ -6,14 +6,14 @@ instead of Python.
 The bot was initially motivated by a friend of mine, who streamed themselves
 playing one of my favorite games: "FTL: Faster Than Light", or "FTL" for short.
 For lack of a better term, it's a spaceship commander simulator focusing on
-strategy and commanding your ship as well as crew members. One of the things
-they always do in their playthroughs is name their crew members after their
-viewers, which often made things way more personal and engaging. As a person who
-enjoyed watching streams along the lines of Twitch Plays Pokemon, I figured that
-it would be a cool concept for viewers to control their in-game crew members
-entirely through chat messages. Unfortunately, I realized that much of this
-initial idea required effectively hacking/modding the game - which I'm not
-against since it's a single player game - but the modding scene is fairly
+real-time strategy and well, commanding your ship and its crew. One of the
+things they always do in their playthroughs is name their crew members after
+their viewers, which often made things way more personal and engaging. As a
+person who enjoyed watching streams along the lines of Twitch Plays Pokemon, I
+figured that it would be a cool concept for viewers to control their in-game
+crew members entirely through chat messages. Unfortunately, I realized that much
+of this initial idea required effectively hacking/modding the game - which I'm
+not against since it's a single player game - but the modding scene is fairly
 limited, and honestly hacking games is way outside of my skillset. Luckily, much
 of the game could still be done purely through keyboard inputs, which pretty
 much set the stage for this whole project.
