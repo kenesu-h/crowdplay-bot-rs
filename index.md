@@ -1,8 +1,9 @@
-## Welcome to GitHub Pages
+## Some opening words.
+I was originally planning to use a Google Doc for this, but they just made embedding Gfycat videos infinitely harder.
 
-You can use the [editor on GitHub](https://github.com/kenesu-h/crowdplay-bot-rs/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<figure class="video_container">
+  <iframe src="https://gfycat.com/chubbyoilyantipodesgreenparakeet" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
 
 ### Markdown
 
