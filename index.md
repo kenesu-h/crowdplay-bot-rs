@@ -1,8 +1,8 @@
 # Index
-This page is meant for people who follow my second Instagram account. This might
-not be the most professional thing as a result.
+This page is meant for people who follow my second IG account. This might not
+be the most professional thing as a result, and definitely not the most succinct.
 
-## Some opening words.
+## Opening Words
 I was originally planning to use a Google Doc for this, but they just made
 embedding Gfycat videos infinitely harder. Regardless, after about four weeks of
 progress and indecision, I can pretty confidently say that this project is in a
@@ -111,6 +111,14 @@ computer play DS games. You can probably use this for any Nintendo DS game as
 long as you're using a DS emulator (namely DeSmuME) and you aren't playing
 something that relies on the touch screen. 
 
+For a quick primer on this:
+1. Include the prefix as always.
+2. Specify the name/letter of the button you want to press - i.e: ";a" will
+   press the A button once.
+3. If you want to press the button more than once, you can optionally give a
+   number after the command - i.e: ";right 10" will press right on the D-pad 10
+   times.
+
 ### Continued Development
 Supporting DS games necessitated being able to switch between "FTL" and "DS"
 mode, so I made ended up implementing settings and eventually a GUI. In layman's
@@ -165,36 +173,30 @@ This is already going on INSANELY long, so I'll try to be short here.
 The rewrite did end up being MUCH faster, and while I lost a ton of my
 brain cells trying to learn Rust for this project (which was a bit of a
 mistake), doing so cut down my project size a ton and I have to admit, there's
-plenty parts of Rust that I like as opposed to Python.
+plenty parts of Rust that I like as opposed to Python. \
+![The Rust rewrite's size.](/images/rust-size.png) \
+Seriously, this is much smaller than the Python version.
 
-### Markdown
+I also ended up fixing bugs as a result of the rewrite, and in general this
+version seems to be a lot cleaner. I did have to dump the whole GUI thing, but
+to be honest, that was a lot more of a pain in the ass than it was worth.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Closing Words
+That pretty much sums up the whole project. While I'm thinking of gradually
+adding more features (and thus, supporting more games) to the bot, I can't
+really promise anything, and for all I know I'll probably be moving onto another
+project, or spending time to focus on more pressing issues in my life at the
+moment. That said, this bot is in a very usable state, albeit only for Windows
+users. Sorry Mac users, I'm afraid I don't have a Mac to test this out with, so
+this will NOT work for you guys (unless you're open to working together on
+this).
 
-```markdown
-Syntax highlighted code block
+You can download the bot on Windows and find out more about the some, but not
+all, of the finer details on the project's GitHub page - you can click the 
+button at the top of the page to go there. If you have any suggestions or you're
+a someone who wants to know more (maybe contribute) to this project, feel free
+to contact me directly and/or leave a comment on the IG post.
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kenesu-h/crowdplay-bot-rs/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+For now though, that's it. I already have something in mind as a continuation of
+this project's functionalities, but no promises I'll even get to it. Anyways,
+take care y'all.
