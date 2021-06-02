@@ -1,5 +1,6 @@
 use crate::model::bot::{Bot, BotSerenity, GameFocusChecker, MessageParser};
 use crate::game::{
+  ftl::FTLUtils,
   nds::NDSUtils,
   supported_game::{SupportedGame}
 };
@@ -41,18 +42,22 @@ impl AppModelSerenity {
     }
   }
 
+  #[allow(unreachable_patterns)]
   fn get_msg_parser(&self, game: &SupportedGame)
     -> Result<Box<dyn MessageParser + Send + Sync>, &str> {
     match game {
       SupportedGame::NDS => return Ok(Box::new(NDSUtils)),
+      SupportedGame::FTL => return Ok(Box::new(FTLUtils)),
       _ => return Err("The given game is either invalid or unsupported.")
     }
   }
 
+  #[allow(unreachable_patterns)]
   fn get_focus_checker(&self, game: &SupportedGame)
     -> Result<Box<dyn GameFocusChecker + Send + Sync>, &str> {
     match game {
       SupportedGame::NDS => return Ok(Box::new(NDSUtils)),
+      SupportedGame::FTL => return Ok(Box::new(FTLUtils)),
       _ => return Err("The given game is either invalid or unsupported.")
     }
   }

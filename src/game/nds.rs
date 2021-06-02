@@ -6,18 +6,18 @@ use inputbot::{KeybdKey, KeybdKey::*};
 
 #[derive(Debug)]
 pub enum NDSAction {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
+  Up,
+  Down,
+  Left,
+  Right,
   Y,
   X,
   A,
   B,
   L,
   R,
-  START,
-  SELECT
+  Start,
+  Select
 }
 
 impl FromStr for NDSAction {
@@ -25,18 +25,18 @@ impl FromStr for NDSAction {
 
   fn from_str(s: &str) -> Result<NDSAction, Self::Err> {
     match s {
-      "up" => Ok(NDSAction::UP),
-      "down" => Ok(NDSAction::DOWN),
-      "left" => Ok(NDSAction::LEFT),
-      "right" => Ok(NDSAction::RIGHT),
+      "up" => Ok(NDSAction::Up),
+      "down" => Ok(NDSAction::Down),
+      "left" => Ok(NDSAction::Left),
+      "right" => Ok(NDSAction::Right),
       "y" => Ok(NDSAction::Y),
       "x" => Ok(NDSAction::X),
       "a" => Ok(NDSAction::A),
       "b" => Ok(NDSAction::B),
       "l" => Ok(NDSAction::L),
       "r" => Ok(NDSAction::R),
-      "start" => Ok(NDSAction::START),
-      "select" => Ok(NDSAction::SELECT),
+      "start" => Ok(NDSAction::Start),
+      "select" => Ok(NDSAction::Select),
       _ => Err(())
     }
   }
@@ -45,10 +45,10 @@ impl FromStr for NDSAction {
 impl ToString for NDSAction {
   fn to_string(&self) -> String {
     match self {
-      NDSAction::UP => "up".to_string(),
-      NDSAction::DOWN => "down".to_string(),
-      NDSAction::LEFT => "left".to_string(),
-      NDSAction::RIGHT => "right".to_string(),
+      NDSAction::Up => "up".to_string(),
+      NDSAction::Down => "down".to_string(),
+      NDSAction::Left => "left".to_string(),
+      NDSAction::Right => "right".to_string(),
       _ => "".to_string()
     }
   }
@@ -61,7 +61,7 @@ pub struct NDSInput {
 
 impl KeyMappable for NDSInput {
   fn to_key_input(&self) -> Box<dyn KeyInputtable> {
-    return Box::new(KeyInput::new(NDSUtils::to_keys(&self.action), self.presses));
+    return Box::new(KeyInput::new(NDSUtils::to_keys(&self.action), self.presses, 100));
   }
 }
 
@@ -81,18 +81,18 @@ pub struct NDSUtils;
 impl NDSUtils {
   fn to_keys(action: &NDSAction) -> Vec<KeybdKey> {
     match action {
-      NDSAction::UP => vec![UpKey],
-      NDSAction::DOWN => vec![DownKey],
-      NDSAction::LEFT => vec![LeftKey],
-      NDSAction::RIGHT => vec![RightKey],
+      NDSAction::Up => vec![UpKey],
+      NDSAction::Down => vec![DownKey],
+      NDSAction::Left => vec![LeftKey],
+      NDSAction::Right => vec![RightKey],
       NDSAction::Y => vec![AKey],
       NDSAction::X => vec![SKey],
       NDSAction::A => vec![XKey],
       NDSAction::B => vec![ZKey],
       NDSAction::L => vec![QKey],
       NDSAction::R => vec![WKey],
-      NDSAction::START => vec![EnterKey],
-      NDSAction::SELECT => vec![OtherKey(47)]
+      NDSAction::Start => vec![EnterKey],
+      NDSAction::Select => vec![OtherKey(47)]
     }
   }
 }

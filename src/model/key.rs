@@ -1,5 +1,6 @@
 use inputbot::KeybdKey;
 use std::{
+  convert::TryFrom,
   thread::sleep,
   time::Duration
 };
@@ -21,14 +22,16 @@ pub trait KeyMappable {
 
 pub struct KeyInput {
   keys: Vec<KeybdKey>,
-  presses: i8
+  presses: i8,
+  delay: i16
 }
 
 impl KeyInput {
-  pub fn new(new_keys: Vec<KeybdKey>, new_presses: i8) -> KeyInput {
+  pub fn new(keys: Vec<KeybdKey>, presses: i8, delay: i16) -> KeyInput {
     KeyInput {
-      keys: new_keys,
-      presses: new_presses
+      keys: keys,
+      presses: presses,
+      delay: delay
     }
   }
 }
@@ -39,15 +42,25 @@ impl KeyInputtable for KeyInput {
     match self.presses {
       0 => return None,
       _ => {
+        let converted_delay: u64 = u64::try_from(self.delay).unwrap();
         for i in 0..self.keys.len() {
           self.keys[i].press();
+          sleep(Duration::from_millis(converted_delay));
         }
-        sleep(Duration::from_millis(75));
+        // 75ms is good for Pokemon
+        // sleep(Duration::from_millis(75));
         for i in 0..self.keys.len() {
           self.keys[i].release();
+          // sleep(Duration::from_millis(converted_delay));
         }
-        sleep(Duration::from_millis(75));
-        return Some(Box::new(KeyInput::new(self.keys.clone(), self.presses - 1)));
+        // sleep(Duration::from_millis(75));
+        return Some(Box::new(
+          KeyInput::new(
+            self.keys.clone(), 
+            self.presses - 1, 
+            self.delay
+          )
+        ));
       }
     }
   }

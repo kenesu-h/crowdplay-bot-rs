@@ -147,7 +147,6 @@ impl EventHandler for Handler {
   async fn message(&self, ctx: Context, msg: Message) -> () {
     if &msg.content.len() > &1
       && &msg.content.chars().nth(0).unwrap().to_string() == &self.prefix {
-      println!("Received a message.");
       let slice: &str = &msg.content[1..];
       push_input(&self.msg_parser, &ctx, &slice).await;
     }
