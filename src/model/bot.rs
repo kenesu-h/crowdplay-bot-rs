@@ -81,7 +81,7 @@ async fn push_input(msg_parser: &Box<dyn MessageParser + Send + Sync>, ctx: &Con
     input_stack_lock.write().await;
   match msg_parser.parse_msg(content) {
     Err(_) => (),
-    Ok(input) => input_stack.push(input)
+    Ok(input) => input_stack.insert(0, input)
   }
 }
 
@@ -92,13 +92,35 @@ async fn pop_input(ctx: Arc<Context>) -> () {
   let mut input_stack:
     RwLockWriteGuard<Vec<Box<dyn KeyInputtable + Send + Sync>>> =
     input_stack_lock.write().await;
+  // println!("Size of input stack: {}", input_stack.len());
   let focus_checker = focus_checker_lock.write().await;
   
   // I enjoy pattern matching in this language though.
+  if focus_checker.game_focused() {
+    match input_stack.pop() {
+      None => return,
+      Some(input) => {
+        if input.get_presses() <= &20 {
+          match input.pop() {
+            None => return,
+            Some(next) => input_stack.push(next)
+          }
+        }
+      }
+    }
+  }
+  /*
   match input_stack.pop() {
     None => return,
-    Some(mut input) => {
+    Some(input) => {
       if input.get_presses() <= &10 {
+        if focus_checker.game_focused() {
+          match input.pop() {
+            None => return,
+            Some(next) => input_stack.insert(0, next)
+          }
+        }
+        /*
         loop {
           if focus_checker.game_focused() {
             match input.pop() {
@@ -107,9 +129,11 @@ async fn pop_input(ctx: Arc<Context>) -> () {
             }
           }
         }
+        */
       }
     }
   }
+  */
 }
 
 struct Handler {
@@ -123,6 +147,7 @@ impl EventHandler for Handler {
   async fn message(&self, ctx: Context, msg: Message) -> () {
     if &msg.content.len() > &1
       && &msg.content.chars().nth(0).unwrap().to_string() == &self.prefix {
+      println!("Received a message.");
       let slice: &str = &msg.content[1..];
       push_input(&self.msg_parser, &ctx, &slice).await;
     }

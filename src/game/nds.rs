@@ -4,6 +4,7 @@ use crate::model::win_utils::{get_focused_window};
 use std::str::FromStr;
 use inputbot::{KeybdKey, KeybdKey::*};
 
+#[derive(Debug)]
 pub enum NDSAction {
   UP,
   DOWN,
@@ -41,35 +42,26 @@ impl FromStr for NDSAction {
   }
 }
 
-fn to_keys(action: &Option<NDSAction>) -> Vec<KeybdKey> {
-  // Would a hashmap be better here?
-  match action {
-    None => Vec::new(),
-    Some(action) => match action {
-      NDSAction::UP => vec![UpKey],
-      NDSAction::DOWN => vec![DownKey],
-      NDSAction::LEFT => vec![LeftKey],
-      NDSAction::RIGHT => vec![RightKey],
-      NDSAction::Y => vec![AKey],
-      NDSAction::X => vec![SKey],
-      NDSAction::A => vec![XKey],
-      NDSAction::B => vec![ZKey],
-      NDSAction::L => vec![QKey],
-      NDSAction::R => vec![WKey],
-      NDSAction::START => vec![EnterKey],
-      NDSAction::SELECT => vec![OtherKey(47)]
+impl ToString for NDSAction {
+  fn to_string(&self) -> String {
+    match self {
+      NDSAction::UP => "up".to_string(),
+      NDSAction::DOWN => "down".to_string(),
+      NDSAction::LEFT => "left".to_string(),
+      NDSAction::RIGHT => "right".to_string(),
+      _ => "".to_string()
     }
   }
 }
 
 pub struct NDSInput {
-  action: Option<NDSAction>,
+  action: NDSAction,
   presses: i8
 }
 
 impl KeyMappable for NDSInput {
   fn to_key_input(&self) -> Box<dyn KeyInputtable> {
-    return Box::new(KeyInput::new(to_keys(&self.action), self.presses));
+    return Box::new(KeyInput::new(NDSUtils::to_keys(&self.action), self.presses));
   }
 }
 
@@ -86,6 +78,25 @@ impl KeyInputtable for NDSInput {
 
 pub struct NDSUtils;
 
+impl NDSUtils {
+  fn to_keys(action: &NDSAction) -> Vec<KeybdKey> {
+    match action {
+      NDSAction::UP => vec![UpKey],
+      NDSAction::DOWN => vec![DownKey],
+      NDSAction::LEFT => vec![LeftKey],
+      NDSAction::RIGHT => vec![RightKey],
+      NDSAction::Y => vec![AKey],
+      NDSAction::X => vec![SKey],
+      NDSAction::A => vec![XKey],
+      NDSAction::B => vec![ZKey],
+      NDSAction::L => vec![QKey],
+      NDSAction::R => vec![WKey],
+      NDSAction::START => vec![EnterKey],
+      NDSAction::SELECT => vec![OtherKey(47)]
+    }
+  }
+}
+
 impl MessageParser for NDSUtils {
   fn parse_msg(&self, content: &str) -> Result<Box<dyn KeyInputtable + Send + Sync>, ()> {
     let mut split = content.split(" ");
@@ -97,13 +108,13 @@ impl MessageParser for NDSUtils {
           Ok(action) => {
             match split.next() {
               None => return Ok(Box::new(
-                NDSInput { action: Some(action), presses: 1 })),
+                NDSInput { action: action, presses: 1 })),
               Some(arg) => {
                 match arg.parse::<i8>() {
                   Err(_) => return Ok(Box::new(
-                    NDSInput { action: Some(action), presses: 1 })),
+                    NDSInput { action: action, presses: 1 })),
                   Ok(int) => return Ok(Box::new(
-                    NDSInput { action: Some(action), presses: int }))
+                    NDSInput { action: action, presses: int }))
                 }
               }
             }
@@ -114,15 +125,11 @@ impl MessageParser for NDSUtils {
   }
 }
 
-fn empty_input() -> Box<NDSInput> {
-  return Box::new(NDSInput { action: None, presses: 0 })
-}
-
 impl GameFocusChecker for NDSUtils {
   fn game_focused(&self) -> bool {
     match get_focused_window().to_str() {
-      Some(title) => return title.contains("DeSmuME"),
-      None => return false
+      None => return false,
+      Some(title) => return title.contains("DeSmuME")
     }
   }
 }
