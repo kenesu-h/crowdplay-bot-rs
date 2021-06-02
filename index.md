@@ -90,7 +90,7 @@ hits. However, cloaking can also take in or lose power.
 
 To activate cloaking, I would just remove the number after the system name, so
 that'd result in ";cloaking". To power/depower it, I would give the number, so
-";cloaking 3" would add 4 bars of power.
+";cloaking 3" would add 3 bars of power.
 
 This is especially important since activatable systems tend to have a major
 effect on gameplay.
