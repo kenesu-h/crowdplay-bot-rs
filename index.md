@@ -1,9 +1,7 @@
 ## Some opening words.
 I was originally planning to use a Google Doc for this, but they just made embedding Gfycat videos infinitely harder.
 
-<figure class="video_container">
-  <iframe src="https://gfycat.com/chubbyoilyantipodesgreenparakeet" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+<div style='position:relative; padding-bottom:calc(56.33% + 44px)'><iframe src='https://gfycat.com/ifr/ChubbyOilyAntipodesgreenparakeet' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div><p> <a href="https://gfycat.com/chubbyoilyantipodesgreenparakeet">via Gfycat</a></p>
 
 ### Markdown
 
