@@ -8,7 +8,10 @@ use serenity::{
   },
   framework::standard::StandardFramework,
   model::{
-    channel::Message,
+    channel::{
+      Message,
+      ReactionType
+    },
     id::GuildId,
     gateway::{
       Ready,
@@ -92,7 +95,6 @@ async fn pop_input(ctx: Arc<Context>) -> () {
   let mut input_stack:
     RwLockWriteGuard<Vec<Box<dyn KeyInputtable + Send + Sync>>> =
     input_stack_lock.write().await;
-  // println!("Size of input stack: {}", input_stack.len());
   let focus_checker = focus_checker_lock.write().await;
   
   // I enjoy pattern matching in this language though.
@@ -109,31 +111,6 @@ async fn pop_input(ctx: Arc<Context>) -> () {
       }
     }
   }
-  /*
-  match input_stack.pop() {
-    None => return,
-    Some(input) => {
-      if input.get_presses() <= &10 {
-        if focus_checker.game_focused() {
-          match input.pop() {
-            None => return,
-            Some(next) => input_stack.insert(0, next)
-          }
-        }
-        /*
-        loop {
-          if focus_checker.game_focused() {
-            match input.pop() {
-              None => break,
-              Some(next) => input = next
-            }
-          }
-        }
-        */
-      }
-    }
-  }
-  */
 }
 
 struct Handler {
@@ -149,6 +126,7 @@ impl EventHandler for Handler {
       && &msg.content.chars().nth(0).unwrap().to_string() == &self.prefix {
       let slice: &str = &msg.content[1..];
       push_input(&self.msg_parser, &ctx, &slice).await;
+      &msg.react(&ctx.http, ReactionType::Unicode("☑️".to_string())).await;
     }
   }
 
