@@ -140,7 +140,7 @@ read.
 2. **The project itself is bloated as hell.** \
    I know I like to preach object-oriented design to my friends who deal with
    programming, but if you're going to design a project with OOD, keep your
-   classes simple, otherwise you might end up with this:
+   classes simple, otherwise you might end up with this: \
    ![Original project size.](/images/python-size.png) \
    This isn't even all of it LOL
 3. **Python was not as neat as I would've liked it to be.** \
