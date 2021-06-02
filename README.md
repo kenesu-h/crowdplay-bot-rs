@@ -1,5 +1,5 @@
 # crowdplay-bot-rs
-This bot is the equivalent of my bot crowdplay-bot, but rewritten in Rust
+This is the equivalent of my crowdplay-bot project, but rewritten in Rust
 instead of Python.
 
 # Background
